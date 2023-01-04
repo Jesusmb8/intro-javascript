@@ -27,7 +27,11 @@ function player(name) {
     }
 
     this.colocarBarcos = () =>{
-        
+        let size = 5;
+        let {fila,columna} = functions.generateRandomPair();
+        if (condition) {
+            
+        }
     }
 }
 

@@ -60,7 +60,20 @@ module.exports.printEnemyBoard = (player) => {
     console.log('  ', player.name + '  enemy board');
     console.table(player.enemyBoard);
 }
-
+/**
+ * Randon number
+ * @param {*} maxValue 
+ * @returns 
+ */
 module.exports.generateRandomNumber = (maxValue)=>{
         return Math.floor(Math.random() * maxValue);
+}
+/**
+ * 
+ * @returns 
+ */
+module.exports.generateRandomPair = () =>{
+    let fila = this.generateRandomNumber(CONSTANTS.FILAS_MAX);
+    let columna = this.generateRandomNumber(CONSTANTS.COL_MAX);
+    return {fila,columna};
 }
