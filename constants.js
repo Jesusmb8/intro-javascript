@@ -8,5 +8,6 @@ module.exports =  {
     TOCADO : '💥',
     AGUA : '💧',
     HUNDIDO : '❌',
-    INIT_BOARD:' '
+    INIT_BOARD:' ',
+    LETRAS:["A","B","C","D","E","F","G", "H", "I", "J"]
 }
