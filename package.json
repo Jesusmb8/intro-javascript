@@ -1,0 +1,7 @@
+{
+  "name": "hundirlaflota",
+  "version": "1.0.1",
+  "description": "Juego de los barcos, hundir la flota.",
+  "main": "index.js",
+  "type": "module"
+}

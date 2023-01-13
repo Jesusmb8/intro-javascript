@@ -1,4 +1,4 @@
-const CONSTANTS = require('../constants.js');
+import * as Constants from '../constants.js';
 
 /**
  * Create a board
@@ -6,14 +6,15 @@ const CONSTANTS = require('../constants.js');
  * @param {*} maxCols 
  * @returns 
  */
-module.exports.createBoard = (maxRows, maxCols) => {
-    let board = [];
+export function createBoard(maxRows, maxCols) {
+    let board = {};
     for (let i = 0; i < maxRows; i++) {
         let col = [];
         for (let j = 0; j < maxCols; j++) {
-            col.push(CONSTANTS.INIT_BOARD);
+            col.push(Constants.INIT_BOARD);
         }
-        board.push(col);
+        // board.push(col);
+        board[Constants.LETRAS[i]] = col;
     }
     return board;
 }
@@ -23,19 +24,19 @@ module.exports.createBoard = (maxRows, maxCols) => {
  * @param {*} maxCols 
  * @returns 
  */
-module.exports.createBoardOneLine = (maxRows, maxCols) => {
-    return new Array(maxRows).fill().map(() => new Array(maxCols).fill(CONSTANTS.INIT_BOARD));
+export function createBoardOneLine(maxRows, maxCols) {
+    return new Array(maxRows).fill().map(() => new Array(maxCols).fill(Constants.INIT_BOARD));
 }
 
 // TODO: BORRAR O TERMINAR
-//module.exports.createBoardNew = (maxCols,maxRows) =>{
+//export   function  createBoardNew = (maxCols,maxRows) =>{
 //     let board = new Array(maxRows).fill({
 //         while(i<10){
-//             return('A' : CONSTANTS.INIT_BOARD)
+//             return('A' : Constants.INIT_BOARD)
 //         }
 //         ,
-//         'B': CONSTANTS.INIT_BOARD,
-//         'C': CONSTANTS.INIT_BOARD
+//         'B': Constants.INIT_BOARD,
+//         'C': Constants.INIT_BOARD
 //       })
 
 //       console.table(board)
@@ -46,7 +47,7 @@ module.exports.createBoardOneLine = (maxRows, maxCols) => {
  * Print own board
  * @param {*} player 
  */
-module.exports.printOwnBoard = (player) => {
+export function printOwnBoard(player) {
     console.log('\n\n');
     console.log('  ', player.name + '  own board');
     console.table(player.ownBoard);
@@ -55,7 +56,7 @@ module.exports.printOwnBoard = (player) => {
  * Print enemy board
  * @param {*} player 
  */
-module.exports.printEnemyBoard = (player) => {
+export function printEnemyBoard(player) {
     console.log('\n\n');
     console.log('  ', player.name + '  enemy board');
     console.table(player.enemyBoard);
@@ -65,15 +66,15 @@ module.exports.printEnemyBoard = (player) => {
  * @param {*} maxValue 
  * @returns 
  */
-module.exports.generateRandomNumber = (maxValue)=>{
-        return Math.floor(Math.random() * maxValue);
+export function generateRandomNumber(maxValue) {
+    return Math.floor(Math.random() * maxValue);
 }
 /**
  * 
  * @returns 
  */
-module.exports.generateRandomPair = () =>{
-    let fila = this.generateRandomNumber(CONSTANTS.FILAS_MAX);
-    let columna = this.generateRandomNumber(CONSTANTS.COL_MAX);
-    return {fila,columna};
+export function generateRandomPair() {
+    let fila = this.generateRandomNumber(Constants.FILAS_MAX);
+    let columna = this.generateRandomNumber(Constants.COL_MAX);
+    return { fila, columna };
 }

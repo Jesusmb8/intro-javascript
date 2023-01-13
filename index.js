@@ -1,6 +1,7 @@
-const CONSTANTS = require('./constants.js');
-const functions = require('./functions/functions.js');
-var Player = require('./functions/Player.js');
+import * as  Constants  from './constants.js';
+import * as  functions from './functions/functions.js';
+import {Player} from './functions/Player.js';
+// var Player = require('./functions/Player.js');
 
 
 
@@ -14,7 +15,6 @@ let player2 = new Player('Daniel');
 // functions.printEnemyBoard(player1);
 // functions.printEnemyBoard(player1);
 functions.printOwnBoard(player1);
-
 
 for (let i = 0; i < 50; i++) {
     player1.disparar();
