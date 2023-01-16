@@ -19,22 +19,22 @@ let player2 = new Player('Daniel');
 player1.setUpBoard();
 player2.setUpBoard();
 
+// Asignamos los tablerso
 
-functions.printOwnBoard(player1);
 
-// for (let i = 0; i < 50; i++) {
-//     player1.disparar();
-// }
-
+functions.printOwnBoard(player2);
+for (let i = 0; i < 30; i++) {
+    player1.disparar(player2);
+}
+functions.printEnemyBoard(player1);
 console.log('Log disparos:', player1.logDisparos);
 console.log('nummer:' + player1.logDisparos.length);
-// functions.printEnemyBoard(player1);
-// 
-// const arrayOfObjects = new Array(10).fill({
-//     '1' : CONSTANTS.INIT_BOARD,
-//     'B': CONSTANTS.INIT_BOARD,
-//     'C': CONSTANTS.INIT_BOARD
-//   })
-  
 
-//   console.table(arrayOfObjects)
+functions.printOwnBoard(player1);
+for (let i = 0; i < 100; i++) {
+    player2.disparar(player1);
+}
+functions.printOwnBoard(player1);
+functions.printEnemyBoard(player2);
+console.log('Log disparos:', player2.logDisparos);
+console.log('nummer:' + player2.logDisparos.length);

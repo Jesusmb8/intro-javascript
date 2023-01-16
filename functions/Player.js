@@ -11,7 +11,7 @@ export function Player(name) {
     this.logDisparos = [];
 
     this.setUpBoard = () =>{
-        console.log('  colocando barcos de ', this.name);
+        console.log('  \ncolocando barcos de ', this.name);
         let ships = [];
         let portaaviones = new Boat('Portaaviones',5,Constants.PORTAAVIONES);
         let buque = new Boat('Buque',4,Constants.BUQUE);
@@ -38,33 +38,28 @@ export function Player(name) {
             functions.colocateBoat(this.ownBoard, ship)
         });
     };
-    this.disparar = () => {
+    this.disparar = (player2) => {
         // Generamos el disparo ahora, todo numérico
         let fila = functions.generateRandomNumber(Constants.FILAS_MAX);
         let columna = functions.generateRandomNumber(Constants.COL_MAX);
         let disparo = Constants.LETRAS[fila] + columna;
+        console.log('Disparamos: ' ,disparo);
         if (this.logDisparos.includes(disparo)) {
             console.log('Repetido, disparamos de nuevo: ' + disparo);
-            this.disparar();
+            this.disparar(player2);
         } else {
             // console.log('disparo a:', disparo);
             this.logDisparos.push(disparo)
             // Marcamos en el tablero
-            if (this.enemyBoard[Constants.LETRAS[fila]][columna] === Constants.AGUA) {
-                console.log('Agua');
+            if (player2.ownBoard[Constants.LETRAS[fila]][columna] === Constants.INIT_BOARD) {
+                console.log(' Agua');
+                this.enemyBoard[Constants.LETRAS[fila]][columna] = Constants.AGUA;
             }else{
-                console.log('Tocado');
+                console.log(' Tocado');
+                this.enemyBoard[Constants.LETRAS[fila]][columna] = Constants.TOCADO;
             }
-            this.enemyBoard[Constants.LETRAS[fila]][columna] = 'X'
 
         }
     }
 
-    // this.colocarBarcos = () => {
-    //     let size = 5;
-    //     let { fila, columna } = functions.generateRandomPair();
-    //     if (condition) {
-
-    //     }
-    // }
 }
