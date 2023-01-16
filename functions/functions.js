@@ -6,7 +6,7 @@ import * as Constants from '../constants.js';
  * @param {*} maxCols 
  * @returns 
  */
-export function createBoard(maxRows, maxCols) {
+export function createEmptyBoard(maxRows, maxCols) {
     let board = {};
     for (let i = 0; i < maxRows; i++) {
         let col = [];
@@ -74,7 +74,36 @@ export function generateRandomNumber(maxValue) {
  * @returns 
  */
 export function generateRandomPair() {
-    let fila = this.generateRandomNumber(Constants.FILAS_MAX);
+    let fila = Constants.LETRAS[this.generateRandomNumber(Constants.FILAS_MAX)];
     let columna = this.generateRandomNumber(Constants.COL_MAX);
     return { fila, columna };
+}
+
+export function colocateBoat(board, boat) {
+    let fila = generateRandomNumber(Constants.FILAS_MAX);
+    let columna = generateRandomNumber(Constants.COL_MAX);
+    console.log('Posicionamos ', boat.icon ,' en:', fila, columna);
+    // Comprobamos si entra
+    if (columna + boat.size <= Constants.FILAS_MAX) {
+        // Entra, posicionamos
+        // Ver si está libre
+        let canPlace = true;
+        for (let index = columna; index < columna + boat.size; index++) {
+            if (board[Constants.LETRAS[fila]][index] !== Constants.INIT_BOARD) {
+                canPlace = false;
+            }
+        }
+        if (canPlace) {
+            for (let index = columna; index < columna + boat.size; index++) {
+                board[Constants.LETRAS[fila]][index] = boat.icon;
+            }
+        } else {
+            console.log('  Ya está ocupado:');
+            colocateBoat(board, boat);
+        }
+    } else {
+        // No entra, buscamos de nuevo
+        console.log('  No entra', fila, columna);
+        colocateBoat(board, boat);
+    }
 }
