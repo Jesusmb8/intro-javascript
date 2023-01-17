@@ -3,6 +3,9 @@ export default class Boat {
       this.name = name;
       this.size = size;
       this.icon = icon;
+      this.disparosRecibidos = 0;
+      this.coordenadas = [];
+      this.hundido = false;
     }
   }
   

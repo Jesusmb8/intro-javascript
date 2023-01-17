@@ -1,4 +1,7 @@
 import * as Constants from '../constants.js';
+import usePrinter from './printer.js'
+
+const { printLine } = usePrinter();
 
 /**
  * Create a board
@@ -48,8 +51,8 @@ export function createBoardOneLine(maxRows, maxCols) {
  * @param {*} player 
  */
 export function printOwnBoard(player) {
-    console.log('\n\n');
-    console.log('  ', player.name + '  own board');
+    console.log('\n');
+    printLine('  ', player.name + '  own board');
     console.table(player.ownBoard);
 }
 /**
@@ -57,8 +60,8 @@ export function printOwnBoard(player) {
  * @param {*} player 
  */
 export function printEnemyBoard(player) {
-    console.log('\n\n');
-    console.log('  ', player.name + '  enemy board');
+    console.log('\n');
+    printLine('  ', player.name + '  enemy board');
     console.table(player.enemyBoard);
 }
 /**
@@ -82,7 +85,7 @@ export function generateRandomPair() {
 export function colocateBoat(board, boat) {
     let fila = generateRandomNumber(Constants.FILAS_MAX);
     let columna = generateRandomNumber(Constants.COL_MAX);
-    console.log('Posicionamos ', boat.icon ,' en:', fila, columna);
+    console.log('Posicionamos ', boat.icon ,' en:', Constants.LETRAS[fila], columna);
     // Comprobamos si entra
     if (columna + boat.size <= Constants.FILAS_MAX) {
         // Entra, posicionamos
@@ -96,11 +99,14 @@ export function colocateBoat(board, boat) {
         if (canPlace) {
             for (let index = columna; index < columna + boat.size; index++) {
                 board[Constants.LETRAS[fila]][index] = boat.icon;
+                boat.coordenadas.push(Constants.LETRAS[fila]+index);
             }
         } else {
-            console.log('  Ya está ocupado:');
+            console.log('  🚨  Ya está ocupado');
             colocateBoat(board, boat);
         }
+        // Colocado en
+        console.log('  ' + boat.icon + '  colocado en:' + boat.coordenadas);
     } else {
         // No entra, buscamos de nuevo
         console.log('  No entra', fila, columna);
