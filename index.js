@@ -4,7 +4,6 @@ import { Player } from './functions/Player.js';
 import usePrinter from './functions/printer.js'
 
 const { printHeading, printLine } = usePrinter()
-// var Player = require('./functions/Player.js');
 
 printHeading('¡Bienvenido al juego de hundir la flota!');
 
@@ -19,32 +18,30 @@ functions.printOwnBoard(player1);
 
 functions.printOwnBoard(player2);
 printHeading('... Comenzamos ...');
+let rondas = 0;
 
+for (let i = 0; i < Constants.DISPAROS_MAXIMOS && !(player1.finish || player2.finish); i++) {
+    let sigueDisparando = true;
+    while (sigueDisparando && !(player1.finish || player2.finish)) {
+        sigueDisparando = player1.disparar(player2, rondas);
+    }
+    sigueDisparando = true;
+    while (sigueDisparando && !(player1.finish || player2.finish)) {
+        sigueDisparando = player2.disparar(player1, rondas);
 
-for (let i = 0; !player1.finish && !player2.finish; i++) {
-    player1.disparar(player2);
-    player2.disparar(player1);
+    }
+    rondas++;
 }
 
-printLine(' Y el ganador es ...');
+printLine(' Y el ganador en ' + rondas + ' rondas es ...');
 if (player1.finish) {
     printHeading(player1.name);
     printLine(' con ' + player1.logDisparos.length + ' disparos.');
+    printLine(player2.name + ' disparó: ' + player2.logDisparos.length);
 
-} else {
+} else if(player2.finish){
     printHeading(player2.name);
     printLine(' con ' + player2.logDisparos.length + ' disparos.');
+    printLine(player1.name + ' disparó: ' + player1.logDisparos.length);
 }
-// functions.printOwnBoard(player2);
-// functions.printEnemyBoard(player1);
-// console.log('Log disparos:', player1.logDisparos);
-// console.log('nummer:' + player1.logDisparos.length);
 
-// for (let i = 0; !player2.finish; i++) {
-//     player2.disparar(player1);
-// }
-// functions.printOwnBoard(player1);
-// functions.printEnemyBoard(player2);
-// console.log('Log disparos:', player2.logDisparos);
-// console.log('nummer player 1: ' + player1.logDisparos.length);
-// console.log('nummer player 2: ' + player2.logDisparos.length);
