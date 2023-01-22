@@ -1,2 +1,2 @@
 # intro-javascript
-Proyecto para introducción js
+Juego de hundir la flota.
